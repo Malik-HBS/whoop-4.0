@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c7dddb734b0c9e3cfaa6698cd725f018b8a5e41f847ae42fd9b0269d44ee9ff4
-size 98
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+@import 'tw-animate-css';

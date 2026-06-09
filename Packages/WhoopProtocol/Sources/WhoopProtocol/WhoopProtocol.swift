@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a45ed4bc9292553b2e185ccd3631afac3435c4972c7e4c104c668725161adce4
-size 452
+import Foundation
+
+/// OpenWhoop protocol library — schema-driven WHOOP 4.0 frame decoder.
+/// Implemented across Framing.swift / Values.swift / Schema.swift / Interpreter.swift (Phase B).
+public enum WhoopProtocolInfo {
+    /// URL of the bundled canonical decode schema (a resource of this package target).
+    public static func schemaResourceURL() -> URL? {
+        Bundle.module.url(forResource: "whoop_protocol", withExtension: "json")
+    }
+}

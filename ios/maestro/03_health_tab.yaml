@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3c96920878b1712f6f36330ec4070c53cd7cc9da9fb869be6b604cf049d64c5a
-size 387
+appId: com.openwhoop.OpenWhoop
+---
+# Flow 3: Health tab placeholder
+# Verifies: Health tab is reachable while the section is empty.
+
+- launchApp
+- runFlow: utils/allow_notifications.yaml
+
+- waitForAnimationToEnd:
+    timeout: 8000
+
+- tapOn:
+    text: "Health"
+
+- waitForAnimationToEnd:
+    timeout: 4000
+
+- assertVisible:
+    text: "Health"
+
+- takeScreenshot: /tmp/maestro_03_health.png

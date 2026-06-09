@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3afe4e3ed35300bced0141d1600136098472c3c32a897658a141a4859aa88c3b
-size 679
+import SwiftUI
+
+struct DashboardDatePill: View {
+    var title: String = "TODAY"
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "chevron.left")
+            Text(title)
+                .font(.system(size: 12, weight: .black))
+                .tracking(1.3)
+            Image(systemName: "chevron.right")
+        }
+        .foregroundStyle(WH.Color.textPrimary)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 7)
+        .background(Color(hex: "#1E2024"), in: Capsule())
+        .overlay {
+            Capsule()
+                .stroke(Color(hex: "#2A2D33"), lineWidth: 1)
+        }
+        .accessibilityLabel(title)
+    }
+}
+

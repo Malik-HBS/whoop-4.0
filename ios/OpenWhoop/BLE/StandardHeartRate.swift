@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3e18e21804ffa85c2821357a1257681dc9f14864f52d17e5fcebe06b2026bb6a
-size 1251
+import Foundation
+
+/// Pure parser for the standard BLE Heart Rate Measurement characteristic (0x2A37).
+/// Returns the heart rate (bpm) and any R-R intervals (ms). Pure → unit-testable.
+public enum StandardHeartRate {
+    public static func parse(_ data: [UInt8]) -> (hr: Int, rr: [Int])? {
+        guard !data.isEmpty else { return nil }
+        let flags = data[0]
+        var idx = 1
+        let hr: Int
+        if flags & 0x01 != 0 {                       // 16-bit HR
+            guard idx + 1 < data.count else { return nil }
+            hr = Int(data[idx]) | (Int(data[idx + 1]) << 8); idx += 2
+        } else {                                     // 8-bit HR
+            guard idx < data.count else { return nil }
+            hr = Int(data[idx]); idx += 1
+        }
+        if flags & 0x08 != 0 { idx += 2 }            // skip Energy Expended (bit 3)
+        var rr: [Int] = []
+        if (flags >> 4) & 0x01 != 0 {                // R-R present (bit 4)
+            while idx + 1 < data.count {
+                let raw = Int(data[idx]) | (Int(data[idx + 1]) << 8)
+                rr.append(Int((Double(raw) / 1024.0 * 1000.0).rounded()))   // 1/1024 s → ms
+                idx += 2
+            }
+        }
+        return (hr, rr)
+    }
+}

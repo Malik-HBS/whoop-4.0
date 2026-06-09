@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c3026e45be1eabd7fd1a48ce581e6319840a8faa6af1ce54c1ec2eaebfc2df18
-size 677
+import Foundation
+
+/// Pure decision: should we SET_CLOCK on this connect? Mirrors WHOOP — set only when the strap's RTC
+/// has drifted beyond a small threshold (or is frozen/way off), not blindly every connect. Avoids
+/// gratuitous clock resets that could introduce discontinuities in derived historical timestamps.
+enum ClockPolicy {
+    /// `deviceClock` = the strap's current RTC reading (unix seconds, from GET_CLOCK). `wallNow` =
+    /// phone wall time (unix seconds). Returns true if |drift| >= threshold.
+    static func shouldSetClock(deviceClock: Int, wallNow: Int, driftThreshold: Int = 2) -> Bool {
+        abs(wallNow - deviceClock) >= driftThreshold
+    }
+}

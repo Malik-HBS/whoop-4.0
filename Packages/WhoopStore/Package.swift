@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cd04ed9342457e1d5fb1e4142273913d6d498471eafd92f98f781322d50e0138
-size 699
+// swift-tools-version: 5.9
+import PackageDescription
+
+let package = Package(
+    name: "WhoopStore",
+    platforms: [.iOS(.v16), .macOS(.v13)],
+    products: [.library(name: "WhoopStore", targets: ["WhoopStore"])],
+    dependencies: [
+        .package(path: "../WhoopProtocol"),
+        .package(url: "https://github.com/groue/GRDB.swift.git", from: "6.0.0"),
+    ],
+    targets: [
+        .target(
+            name: "WhoopStore",
+            dependencies: [
+                "WhoopProtocol",
+                .product(name: "GRDB", package: "GRDB.swift"),
+            ]
+        ),
+        .testTarget(
+            name: "WhoopStoreTests",
+            dependencies: ["WhoopStore"]
+        ),
+    ]
+)

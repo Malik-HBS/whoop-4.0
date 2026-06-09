@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b8e01d3427de10bce6f6f81831db4d8add89086c29a19f4dc1050c37b8098c71
-size 610
+# Reverse-engineering history
+
+Scripts and notes from decoding the WHOOP 4.0 BLE protocol. The authoritative reference is
+`../FINDINGS.md`. Several scripts import third-party clones that are intentionally **not**
+committed (see root `.gitignore`):
+
+- `whoomp/` — github.com/jogolden/whoomp (firmware-extracted protocol; `scripts/packet.py`).
+- `whoop-reader/` — provides the local Python venv (`whoop-reader/.venv`, with `whoop_protocol`
+  installed editable) used to run these scripts and `scripts/gen_golden.py`.
+
+Clone/recreate these locally to run the RE scripts; they are not needed to build the app.

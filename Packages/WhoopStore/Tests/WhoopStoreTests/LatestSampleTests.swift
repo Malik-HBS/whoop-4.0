@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1b4aece83f1e09364ab1295ef0c1a98229a6cd245149aab67f965bbaa0aee06a
-size 713
+import XCTest
+import WhoopProtocol
+@testable import WhoopStore
+
+final class LatestSampleTests: XCTestCase {
+    func testLatestHRSampleTs() async throws {
+        let store = try await WhoopStore.inMemory()
+        try await store.upsertDevice(id: "d", mac: nil, name: nil)
+        // No rows yet → nil.
+        let empty = try await store.latestHRSampleTs(deviceId: "d")
+        XCTAssertNil(empty)
+        // Insert HR rows at ts 100 and 250; latest = 250.
+        let s = Streams(hr: [HRSample(ts: 100, bpm: 60), HRSample(ts: 250, bpm: 61)])
+        _ = try await store.insert(s, deviceId: "d")
+        let latest = try await store.latestHRSampleTs(deviceId: "d")
+        XCTAssertEqual(latest, 250)
+    }
+}

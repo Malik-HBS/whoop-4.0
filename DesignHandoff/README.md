@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c2ba4c105812c77bd5fa880fb3cdb068b0169b2f577e646c5d3b6528cb2ba8f9
-size 338
+
+  # Clone design and review notes
+
+  This is a code bundle for Clone design and review notes. The original project is available at https://www.figma.com/design/vRrJTtRAuNKyCOkpm5qAq1/Clone-design-and-review-notes.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  

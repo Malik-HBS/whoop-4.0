@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:517b108922d2dac8780733091c8bb8e1a476e3b67ce9601c6d96472a49a9c172
-size 392
+# Copy to re/device_local.py (gitignored) and fill in your strap's real values.
+# These are personal identifiers — device_local.py must never be committed.
+DEVICE_UUID = "00000000-0000-0000-0000-000000000000"  # macOS CoreBluetooth peripheral UUID
+DEVICE_MAC = "00:00:00:00:00:00"                       # Bluetooth MAC
+DEVICE_SERIAL = "0000000000"                            # strap serial

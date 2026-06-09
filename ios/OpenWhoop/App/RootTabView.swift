@@ -1,3 +1,34 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:290fc994b662174388335af735e018e4d9a23dfe9a9ae395b93b9e59d63c3af1
-size 812
+import SwiftUI
+
+struct RootTabView: View {
+    var body: some View {
+        TabView {
+            TodayView()
+                .tabItem {
+                    Label("Today", systemImage: "house")
+                }
+
+            SleepView()
+                .tabItem {
+                    Label("Sleep", systemImage: "bed.double")
+                }
+
+            HealthView()
+                .tabItem {
+                    Label("Health", systemImage: "heart.text.square")
+                }
+
+            WorkoutsView()
+                .tabItem {
+                    Label("Workouts", systemImage: "figure.run")
+                }
+
+            NavigationStack {
+                LiveView()
+            }
+            .tabItem {
+                Label("Device", systemImage: "wave.3.right")
+            }
+        }
+    }
+}

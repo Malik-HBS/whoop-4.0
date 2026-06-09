@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:33fccdc6ced2f04d981baebc3c10d3f7a31b6a66c3798e2ab7a3e6f75fa6b2c1
-size 542
+// swift-tools-version: 5.9
+import PackageDescription
+
+let package = Package(
+    name: "WhoopProtocol",
+    platforms: [.iOS(.v16), .macOS(.v13)],
+    products: [.library(name: "WhoopProtocol", targets: ["WhoopProtocol"])],
+    targets: [
+        .target(
+            name: "WhoopProtocol",
+            resources: [.process("Resources/whoop_protocol.json")]
+        ),
+        .testTarget(
+            name: "WhoopProtocolTests",
+            dependencies: ["WhoopProtocol"],
+            resources: [.process("Resources")]
+        ),
+    ]
+)

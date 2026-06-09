@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:69f8246f36fc059d31435479548703a7ec7a9d0290a91c9b5882ddd6706f7d39
-size 744
+#!/usr/bin/env bash
+# Sync the canonical decode schema into its consumers. Run from anywhere.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+CANON="$ROOT/protocol/whoop_protocol.json"
+PKG="$ROOT/Packages/WhoopProtocol/Sources/WhoopProtocol/Resources/whoop_protocol.json"
+HOMESERVER="${HOME_SERVER_REPO:-$HOME/Developer/home-server}/packages/whoop-protocol/whoop_protocol/schema/whoop_protocol.json"
+
+mkdir -p "$(dirname "$PKG")"
+cp "$CANON" "$PKG"
+echo "synced → $PKG"
+if [ -f "$HOMESERVER" ]; then
+  cp "$CANON" "$HOMESERVER"
+  echo "synced → $HOMESERVER  (run the home-server whoop-protocol tests to verify decode)"
+else
+  echo "home-server not found at $HOMESERVER (set HOME_SERVER_REPO to override); skipped server sync"
+fi

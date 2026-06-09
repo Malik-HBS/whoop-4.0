@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a43df064684a01ca3c2ee5d7f7d673887dba62cbf328b52c0349ee2706cfc77a
-size 578
+import Foundation
+enum StorePaths {
+    /// `<AppSupport>/OpenWhoop/whoop.sqlite`, creating the directory if needed.
+    static func defaultDatabasePath() throws -> String {
+        let fm = FileManager.default
+        let base = try fm.url(for: .applicationSupportDirectory, in: .userDomainMask,
+                              appropriateFor: nil, create: true)
+            .appendingPathComponent("OpenWhoop", isDirectory: true)
+        try fm.createDirectory(at: base, withIntermediateDirectories: true)
+        return base.appendingPathComponent("whoop.sqlite").path
+    }
+}

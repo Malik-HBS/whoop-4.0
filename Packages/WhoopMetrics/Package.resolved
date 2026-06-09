@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e6e18af747bbf34dfca0682b4b23204330543dc988689d344403ae8b3be6959a
-size 303
+{
+  "pins" : [
+    {
+      "identity" : "grdb.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/groue/GRDB.swift.git",
+      "state" : {
+        "revision" : "2cf6c756e1e5ef6901ebae16576a7e4e4b834622",
+        "version" : "6.29.3"
+      }
+    }
+  ],
+  "version" : 2
+}

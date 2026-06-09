@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d00c6b9849395a6927fb820ce1d6d1515d94e63cf20130d118e8419a5f9439a0
-size 622
+// swift-tools-version: 5.9
+import PackageDescription
+
+let package = Package(
+    name: "WhoopMetrics",
+    platforms: [.iOS(.v16), .macOS(.v13)],
+    products: [.library(name: "WhoopMetrics", targets: ["WhoopMetrics"])],
+    dependencies: [
+        .package(path: "../WhoopStore"),
+        .package(path: "../WhoopProtocol"),
+    ],
+    targets: [
+        .target(
+            name: "WhoopMetrics",
+            dependencies: ["WhoopStore", "WhoopProtocol"]
+        ),
+        .testTarget(
+            name: "WhoopMetricsTests",
+            dependencies: ["WhoopMetrics", "WhoopStore", "WhoopProtocol"]
+        ),
+    ]
+)
